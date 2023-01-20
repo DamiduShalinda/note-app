@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.darkMode {
+    @apply bg-[#28282b]
+}
+.darkMode h1 {
+    @apply text-white
+}
+.darkMode button{
+    @apply text-white border-white
+}

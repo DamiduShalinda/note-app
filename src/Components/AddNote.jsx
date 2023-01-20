@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 
-const AddNote = () => {
+const AddNote = ( {handleAddNote} ) => {
 
     const [text , setText] = useState('');
+    const characterLimit = 200;
     
     const handleEditText = (event) => {
-        setText(event.target.value)
+        if(characterLimit - event.target.value.length >0){
+          setText(event.target.value)
+        }
+    }
+
+    const handleClickSave = () => {
+        if(text.trim().length > 0){
+          handleAddNote(text);
+          setText('');
+        }
     }
 
   return (
@@ -15,8 +25,8 @@ const AddNote = () => {
         className='border-none resize-none bg-[#67d7cc] focus:outline-none placeholder:text-gray-500'
         onChange={handleEditText} value={text}></textarea>
     <div className='flex justify-between'>
-        <small>200 remaining</small>
-        <button className='bg-[#e1e1e1] rounded-[10px] px-1 pb-1'>Save</button>
+        <small>{characterLimit - text.length} remaining</small>
+        <button className='bg-[#e1e1e1] rounded-[10px] px-1 pb-1' onClick={handleClickSave} type="submit">Save</button>
     </div>
     </div>
   )
